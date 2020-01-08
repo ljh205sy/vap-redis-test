@@ -1,0 +1,28 @@
+server:
+  port: 10000
+
+spring:
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  cloud:
+    nacos:
+      config:
+        server-addr: ${SERVER_ADDR}
+        namespace:   ${NAMESPACE}
+        file-extension: yaml
+      discovery:
+        server-addr: ${SERVER_ADDR}
+        namespace: ${NAMESPACE}
+        enabled: true
+SERVER_ADDR: ${NACOS_HOST:127.0.0.1}:${NACOS_PORT:8848}
+NAMESPACE: ${NACOS_NAMESPACE:a338c762-d2a7-4a2f-86f0-022c171c0928}
+
+logging:
+  level:
+    com.vrv.vap: DEBUG
+    root: info
+    org.springframework.cloud.sleuth: ERROR
+    com.alibaba.nacos: ERROR
