@@ -1,0 +1,26 @@
+server:
+  port: 8000
+spring:
+  application:
+    name: cachename
+  cache:
+    type: redis
+  redis:
+    host: ${REDIS_HOST:127.0.0.1}
+    port: ${REDIS_PORT:6379}
+    password: ${REDIS_PWD:vrv@1234}
+    timeout: 10000   #超时时间，ms
+    database: 0
+    jedis:
+      pool:
+        max-active: 100 #最大活动对象数
+        max-wait: 3000  #当池内没有返回对象时，最大等待时间, 3000毫秒
+        max-idle: 100
+        min-idle: 8
+        time-between-eviction-runs: 30000  #“空闲链接”检测线程，检测的周期，毫秒数。如果为负值，表示不运行“检测线程”。默认为-1.
+
+
+logging:
+  level:
+    com.vrv.vap: DEBUG
+    root: info

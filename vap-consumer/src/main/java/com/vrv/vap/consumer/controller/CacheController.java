@@ -30,19 +30,22 @@ public class CacheController {
     @GetMapping("/{id}")
     @ApiOperation(value = "Query", notes = "查询")
     public Object query(@PathVariable String id) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String format = sdf.format(new Date());
+        String format = getString();
         String s = consumerService.cacheQax(id);
         logger.info("查询:" + format + " :Cacheable create.  query id is " + id + ", result:" + s);
         return s;
     }
 
+    private String getString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sdf.format(new Date());
+    }
 
     @DeleteMapping("/{id}")
     @ApiOperation(value = "Delete", notes = "删除")
     public String delete(@PathVariable Long id) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        logger.info(sdf.format(new Date()) + " : Cacheable delete,  query id is " + id);
+        String format = getString();
+        logger.info(format + " : Cacheable delete,  query id is " + id);
         logger.info("----------->id:" + id);
         final String delete = consumerService.delete(id);
         return "aaa";

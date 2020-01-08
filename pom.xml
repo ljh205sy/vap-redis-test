@@ -12,6 +12,7 @@
     <modules>
         <module>vap-producer</module>
         <module>vap-consumer</module>
+        <module>vap-example</module>
     </modules>
 
     <properties>

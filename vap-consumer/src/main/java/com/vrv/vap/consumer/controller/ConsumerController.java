@@ -41,8 +41,7 @@ public class ConsumerController {
     @RequestMapping(value = "/echo/{str}", method = RequestMethod.GET)
     @ApiOperation(value = "consumer测试que队列", notes = "打印")
     public String consumer(@PathVariable String str) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String format = sdf.format(new Date());
+        String format = getFormatDate();
         logger.info("Try to que get value， 时间：" + format);
         String s = consumerService.cacheQax(str);
         return s + ", " + format;
@@ -59,8 +58,7 @@ public class ConsumerController {
     @RequestMapping(value = "/menu/{str}", method = RequestMethod.GET)
     @ApiOperation(value = "consumer测试menu队列", notes = "打印")
     public String menu(@PathVariable String str) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String format = sdf.format(new Date());
+        String format = getFormatDate();
         logger.info("Try to menu get value， 时间：" + format);
         String s = consumerService.cacheMenu(str);
         return s + ", " + format;
@@ -70,8 +68,7 @@ public class ConsumerController {
     @RequestMapping(value = "/other/{str}", method = RequestMethod.GET)
     @ApiOperation(value = "consumer测试other队列", notes = "打印")
     public String other(@PathVariable String str) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String format = sdf.format(new Date());
+        String format = getFormatDate();
         logger.info("Try to other get value， 时间：" + format);
         String s = consumerService.cacheOther(str);
         return s + ", " + format;
@@ -80,22 +77,23 @@ public class ConsumerController {
     @RequestMapping(value = "/test/{str}", method = RequestMethod.GET)
     @ApiOperation(value = "consumer测试test", notes = "打印")
     public String test(@PathVariable String str) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String format = sdf.format(new Date());
+        String format = getFormatDate();
         logger.info("Try to test get value， 时间：" + format);
         return format;
     }
 
 
-
     @RequestMapping(value = "/redis/{str}", method = RequestMethod.GET)
     @ApiOperation(value = "consumer测试线程redis队列", notes = "redis队列")
     public String redis(@PathVariable String str) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String format = sdf.format(new Date());
+        String format = getFormatDate();
         logger.info("Try to redis get value， 时间：" + format);
         consumerService.duplicateProcess(str);
         return format;
     }
 
+    private String getFormatDate() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sdf.format(new Date());
+    }
 }
